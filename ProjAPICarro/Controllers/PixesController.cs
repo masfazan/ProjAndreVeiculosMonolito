@@ -29,7 +29,7 @@ namespace ProjAPICarro.Controllers
           {
               return NotFound();
           }
-            return await _context.Pix.ToListAsync();
+            return await _context.Pix.Include(t => t.Tipo).ToListAsync();
         }
 
         // GET: api/Pixes/5
@@ -40,7 +40,7 @@ namespace ProjAPICarro.Controllers
           {
               return NotFound();
           }
-            var pix = await _context.Pix.FindAsync(id);
+            var pix = await _context.Pix.Include(t => t.Tipo).Where(p => p.Id == id).SingleOrDefaultAsync(p => p.Id == id);
 
             if (pix == null)
             {

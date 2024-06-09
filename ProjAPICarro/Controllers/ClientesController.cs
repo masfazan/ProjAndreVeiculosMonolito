@@ -40,7 +40,7 @@ namespace ProjAPICarro.Controllers
           {
               return NotFound();
           }
-            var cliente = await _context.Cliente.Include(e => e.Endereco).Where(c => c.Documento == id).FirstOrDefaultAsync();
+            var cliente = await _context.Cliente.Include(e => e.Endereco).Where(c => c.Documento == id).SingleOrDefaultAsync(c => c.Documento == id);
 
             if (cliente == null)
             {
